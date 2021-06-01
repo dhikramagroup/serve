@@ -19,5 +19,5 @@ func main() {
 	app.Get("/contact-us", repository.ContactPage)
 	app.Get("/about-us", repository.AboutPage)
 
-	app.Run(iris.TLS("localhost:80", "certificate.crt", "private.key"))
+	app.Run(iris.TLS("localhost:8080", "certificate.crt", "private.key"))
 }
