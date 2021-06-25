@@ -107,12 +107,23 @@ article h2{
     }
 }
 
-@media (max-width: 539px) {
+@media (max-width: 767px) {
     #services{
         display: flex;
         flex-direction: column;
         padding-left: 10px;
         padding-right: 10px;
+    }
+
+    #services section:first-child{
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: repeat(3, 1fr );
+        gap: 10px;
+    }
+
+    .services-icon {
+        grid-template-columns: .3fr 2fr;
     }
 }
 
