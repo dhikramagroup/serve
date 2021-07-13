@@ -1,47 +1,44 @@
-<div class="about-section">
-    <h1>About Us Page</h1>
-    <p>Some text about who we are and what we do.</p>
-    <p>Resize the browser window to see that this page is responsive by the way.</p>
+<style>
+  /* Set height to 100% for body and html to enable the background image to cover the whole page: */
+
+  main {
+    /* Background image */
+    background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
+    /* Full-screen */
+    height: 80vh;
+    /* Center the background image */
+    background-position: center;
+    /* Scale and zoom in the image */
+    background-size: cover;
+    /* Add position: relative to enable absolutely positioned elements inside the image (place text) */
+    /* Add a white text color to all elements inside the .bgimg container */
+    color: white;
+  }
+
+  /* Position text in the middle */
+  .middle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .bgimg p{
+    color: white;
+  }
+
+  /* Style the <hr> element */
+  hr {
+    margin: auto;
+    width: 40%;
+  }
+</style>
+
+<div class="bgimg">
+  <div class="middle">
+    <h1>COMING SOON</h1>
+    <hr>
+    <p id="demo" style="font-size:30px"></p>
   </div>
-  
-  <h2 style="text-align:center">Our Team</h2>
-  <div class="row">
-    <div class="column">
-      <div class="card">
-        <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
-        <div class="container">
-          <h2>Jane Doe</h2>
-          <p class="title">CEO & Founder</p>
-          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-          <p>jane@example.com</p>
-          <p><button class="button">Contact</button></p>
-        </div>
-      </div>
-    </div>
-  
-    <div class="column">
-      <div class="card">
-        <img src="/w3images/team2.jpg" alt="Mike" style="width:100%">
-        <div class="container">
-          <h2>Mike Ross</h2>
-          <p class="title">Art Director</p>
-          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-          <p>mike@example.com</p>
-          <p><button class="button">Contact</button></p>
-        </div>
-      </div>
-    </div>
-  
-    <div class="column">
-      <div class="card">
-        <img src="/w3images/team3.jpg" alt="John" style="width:100%">
-        <div class="container">
-          <h2>John Doe</h2>
-          <p class="title">Designer</p>
-          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-          <p>john@example.com</p>
-          <p><button class="button">Contact</button></p>
-        </div>
-      </div>
-    </div>
-  </div>
+<script src="js/comming-son.js"></script>
