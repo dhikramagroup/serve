@@ -10,6 +10,7 @@ import (
 func main() {
 	app := iris.New()
 	app.HandleDir("/", iris.Dir("./web/public"))
+	app.Use(iris.Compression, iris.Cache(time.Hour))
 
 	app.RegisterView(iris.HTML("./web/views", ".html"))
 
