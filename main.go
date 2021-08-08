@@ -1,6 +1,7 @@
 package main
 
 import (
+	"regexp"
 	"time"
 	"web/dhikrama/src/repository"
 
@@ -9,8 +10,15 @@ import (
 
 func main() {
 	app := iris.New()
-	app.HandleDir("/", iris.Dir("./web/public"))
-	app.Use(iris.Compression, iris.Cache(350))
+	app.HandleDir("/", iris.Dir("./web/public"), iris.DirOptions{
+		Cache: iris.DirCacheOptions{
+			Enable:         true,
+			CompressIgnore: regexp.MustCompile("/"),
+		},
+		Compress: true,
+	})
+
+	app.Use(iris.StaticCache(17 * time.Hour))
 
 	app.RegisterView(iris.HTML("./web/views", ".html"))
 

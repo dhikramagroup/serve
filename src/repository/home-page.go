@@ -8,7 +8,7 @@ func HomePage(ctx iris.Context) {
 
 	data := iris.Map{
 		"canonical":  "https://www.kang-bangunan.com",
-		"Title":      "Page Title",
+		"Title":      "Home page || dikrama jasa",
 		"FooterText": "Footer contents",
 		"Message":    "Main contents",
 	}
