@@ -41,7 +41,11 @@ func DhikramaApp() *iris.Application {
 		//
 		// Optional validator that loops through each requested resource.
 		// AssetValidator:  func(ctx iris.Context, name string) bool { ... }
-
+		AssetValidator: func(ctx iris.Context, name string) bool {
+			ctx.Header("Content-Encoding", "gzip")
+			ctx.Header("Vary", "Accept-Encoding")
+			return true
+		},
 	}
 
 	app.HandleDir("/js", iris.Dir("./web/public/js"), dirCache)
