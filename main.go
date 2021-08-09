@@ -1,6 +1,7 @@
 package main
 
 import (
+	"time"
 	"web/dhikrama/src/modules"
 	"web/dhikrama/src/repository"
 
@@ -10,8 +11,7 @@ import (
 
 func main() {
 	app := modules.DhikramaApp()
-
-	app.Use(cache.StaticCache(-1))
+	app.Use(cache.StaticCache(24 * time.Hour))
 
 	app.RegisterView(iris.HTML("./web/views", ".html"))
 

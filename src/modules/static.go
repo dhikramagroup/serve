@@ -1,57 +1,42 @@
 package modules
 
-import "github.com/kataras/iris/v12"
+import (
+	"github.com/kataras/iris/v12"
+)
+
+var dirOptions = iris.DirOptions{
+	IndexName: "index.html",
+	// The `Compress` field is ignored
+	// when the file is cached (when Cache.Enable is true),
+	// because the cache file has a map of pre-compressed contents for each encoding
+	// that is served based on client's accept-encoding.
+	Compress: true, // true or false does not matter here.
+	Cache: iris.DirCacheOptions{
+		Enable:         true,
+		CompressIgnore: iris.MatchImagesAssets,
+		// Here, define the encodings that the cached files should be pre-compressed
+		// and served based on client's needs.
+		Encodings:       []string{"gzip", "deflate", "br", "snappy"},
+		CompressMinSize: 50, // files smaller than this size will NOT be compressed.
+		Verbose:         1,
+	},
+}
 
 func DhikramaApp() *iris.Application {
 	app := iris.New()
 
 	app.Favicon("./web/public/favicon.ico")
+	// app.Use(cache.StaticCache(24 * time.Hour))
 
 	// first parameter is the request path
 	// second is the system directory
 	//
 	// app.HandleDir("/css", iris.Dir("./assets/css"))
 	// app.HandleDir("/js",  iris.Dir("./assets/js"))
-	dirCache := iris.DirOptions{
-		// Defaults to "/index.html", if request path is ending with **/*/$IndexName
-		// then it redirects to **/*(/) which another handler is handling it,
-		// that another handler, called index handler, is auto-registered by the framework
-		// if end developer does not managed to handle it by hand.
-		IndexName: "/",
-		// When files should served under compression.
-		Compress: true,
-		// List the files inside the current requested directory if `IndexName` not found.
-		ShowList: false,
-		// When ShowList is true you can configure if you want to show or hide hidden files.
-		ShowHidden: false,
-		Cache: iris.DirCacheOptions{
-			// enable in-memory cache and pre-compress the files.
-			Enable: true,
-			// ignore image types (and pdf).
-			CompressIgnore: iris.MatchImagesAssets,
-			// do not compress files smaller than size.
-			CompressMinSize: 300,
-			// available encodings that will be negotiated with client's needs.
-			Encodings: []string{"gzip", "br", "deflate", "snappy" /* you can also add: deflate, snappy */},
-		},
-		DirList: iris.DirListRich(),
-		// If `ShowList` is true then this function will be used instead of the default
-		// one to show the list of files of a current requested directory(dir).
-		// DirList: func(ctx iris.Context, dirName string, dir http.File) error { ... }
-		//
-		// Optional validator that loops through each requested resource.
-		// AssetValidator:  func(ctx iris.Context, name string) bool { ... }
-		AssetValidator: func(ctx iris.Context, name string) bool {
-			ctx.Header("Content-Encoding", "gzip")
-			ctx.Header("Vary", "Accept-Encoding")
-			return true
-		},
-	}
-
-	app.HandleDir("/js", iris.Dir("./web/public/js"), dirCache)
-	app.HandleDir("/css", iris.Dir("./web/public/css"), dirCache)
-	// app.HandleDir("/icons", iris.Dir("./web/public/icons"), dirCache)
-	app.HandleDir("/images", iris.Dir("./web/public/images"), dirCache)
+	app.HandleDir("/js", iris.Dir("./web/public/js"), dirOptions)
+	app.HandleDir("/css", iris.Dir("./web/public/css"), dirOptions)
+	// app.HandleDir("/icons", iris.Dir("./web/public/icons"), dirOptions)
+	app.HandleDir("/images", iris.Dir("./web/public/images"), dirOptions)
 	app.HandleDir("/", iris.Dir("./web/public/robots"))
 
 	// You can also register any index handler manually, order of registration does not matter:
