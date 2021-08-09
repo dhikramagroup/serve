@@ -19,7 +19,7 @@ func DhikramaApp() *iris.Application {
 		// if end developer does not managed to handle it by hand.
 		IndexName: "/",
 		// When files should served under compression.
-		Compress: false,
+		Compress: true,
 		// List the files inside the current requested directory if `IndexName` not found.
 		ShowList: false,
 		// When ShowList is true you can configure if you want to show or hide hidden files.
@@ -32,7 +32,7 @@ func DhikramaApp() *iris.Application {
 			// do not compress files smaller than size.
 			CompressMinSize: 300,
 			// available encodings that will be negotiated with client's needs.
-			Encodings: []string{"gzip", "br" /* you can also add: deflate, snappy */},
+			Encodings: []string{"gzip", "br", "deflate", "snappy" /* you can also add: deflate, snappy */},
 		},
 		DirList: iris.DirListRich(),
 		// If `ShowList` is true then this function will be used instead of the default
