@@ -12,8 +12,7 @@ func DhikramaApp() *iris.Application {
 	//
 	// app.HandleDir("/css", iris.Dir("./assets/css"))
 	// app.HandleDir("/js",  iris.Dir("./assets/js"))
-
-	app.HandleDir("/assets", iris.Dir("./web/public"), iris.DirOptions{
+	dirCache := iris.DirOptions{
 		// Defaults to "/index.html", if request path is ending with **/*/$IndexName
 		// then it redirects to **/*(/) which another handler is handling it,
 		// that another handler, called index handler, is auto-registered by the framework
@@ -42,7 +41,14 @@ func DhikramaApp() *iris.Application {
 		//
 		// Optional validator that loops through each requested resource.
 		// AssetValidator:  func(ctx iris.Context, name string) bool { ... }
-	})
+
+	}
+
+	app.HandleDir("/assets", iris.Dir("./web/public/js"), dirCache)
+	app.HandleDir("/assets", iris.Dir("./web/public/css"), dirCache)
+	app.HandleDir("/assets", iris.Dir("./web/public/icons"), dirCache)
+	app.HandleDir("/assets", iris.Dir("./web/public/images"), dirCache)
+	app.HandleDir("/", iris.Dir("./web/public/"))
 
 	// You can also register any index handler manually, order of registration does not matter:
 	// v1.Get("/static", [...custom middleware...], func(ctx iris.Context) {
