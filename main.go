@@ -20,5 +20,5 @@ func main() {
 	app.Get("/contact-us", repository.ContactPage)
 	app.Get("/about-us", repository.AboutPage)
 	// app.Listen(":8080")
-	app.Run(iris.AutoTLS(":443", "kang-bangunan.com www.kang-bangunan.com", "dhirama.group@gmail.com"))
+	// app.Run(iris.AutoTLS(":443", "kang-bangunan.com www.kang-bangunan.com", "dhirama.group@gmail.com"))
 }

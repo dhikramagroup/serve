@@ -48,7 +48,7 @@ func DhikramaApp() *iris.Application {
 	app.HandleDir("/assets", iris.Dir("./web/public/css"), dirCache)
 	app.HandleDir("/assets", iris.Dir("./web/public/icons"), dirCache)
 	app.HandleDir("/assets", iris.Dir("./web/public/images"), dirCache)
-	app.HandleDir("/", iris.Dir("./web/public/"))
+	app.HandleDir("/", iris.Dir("./web/public/robots"))
 
 	// You can also register any index handler manually, order of registration does not matter:
 	// v1.Get("/static", [...custom middleware...], func(ctx iris.Context) {
