@@ -5,7 +5,7 @@ import "github.com/kataras/iris/v12"
 func DhikramaApp() *iris.Application {
 	app := iris.New()
 
-	app.Favicon("./web/public/icons/favicon.ico")
+	app.Favicon("./web/public/favicon.ico")
 
 	// first parameter is the request path
 	// second is the system directory
@@ -45,8 +45,8 @@ func DhikramaApp() *iris.Application {
 	}
 
 	app.HandleDir("/js", iris.Dir("./web/public/js"), dirCache)
-	app.HandleDir("/css", iris.Dir("./web/public/css"), dirCache)
-	app.HandleDir("/icons", iris.Dir("./web/public/icons"), dirCache)
+	// app.HandleDir("/css", iris.Dir("./web/public/css"), dirCache)
+	// app.HandleDir("/icons", iris.Dir("./web/public/icons"), dirCache)
 	app.HandleDir("/images", iris.Dir("./web/public/images"), dirCache)
 	app.HandleDir("/", iris.Dir("./web/public/robots"))
 
