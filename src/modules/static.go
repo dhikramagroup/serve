@@ -1,16 +1,25 @@
 package modules
 
 import (
+	"regexp"
+
 	"github.com/kataras/iris/v12"
 )
 
 var dirOptions = iris.DirOptions{
 	IndexName: "index.html",
+	PushTargetsRegexp: map[string]*regexp.Regexp{
+		"/":       iris.MatchCommonAssets,
+		"/js":     iris.MatchCommonAssets,
+		"/css":    iris.MatchCommonAssets,
+		"/images": iris.MatchCommonAssets},
 	// The `Compress` field is ignored
 	// when the file is cached (when Cache.Enable is true),
 	// because the cache file has a map of pre-compressed contents for each encoding
 	// that is served based on client's accept-encoding.
 	Compress: true, // true or false does not matter here.
+	ShowList: true,
+	SPA:      true,
 	Cache: iris.DirCacheOptions{
 		Enable:         true,
 		CompressIgnore: iris.MatchImagesAssets,
