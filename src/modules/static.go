@@ -49,7 +49,7 @@ func DhikramaApp() *iris.Application {
 	}
 
 	app.HandleDir("/js", iris.Dir("./web/public/js"), dirCache)
-	// app.HandleDir("/css", iris.Dir("./web/public/css"), dirCache)
+	app.HandleDir("/css", iris.Dir("./web/public/css"), dirCache)
 	// app.HandleDir("/icons", iris.Dir("./web/public/icons"), dirCache)
 	app.HandleDir("/images", iris.Dir("./web/public/images"), dirCache)
 	app.HandleDir("/", iris.Dir("./web/public/robots"))
