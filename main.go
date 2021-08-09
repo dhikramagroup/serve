@@ -1,28 +1,21 @@
 package main
 
 import (
-	"regexp"
-	"time"
+	"web/dhikrama/src/modules"
 	"web/dhikrama/src/repository"
 
 	"github.com/kataras/iris/v12"
+	"github.com/kataras/iris/v12/cache"
 )
 
 func main() {
-	app := iris.New()
-	app.HandleDir("/", iris.Dir("./web/public"), iris.DirOptions{
-		Cache: iris.DirCacheOptions{
-			Enable:         true,
-			CompressIgnore: regexp.MustCompile("/"),
-		},
-		Compress: true,
-	})
+	app := modules.DhikramaApp()
 
-	app.Use(iris.StaticCache(17 * time.Hour))
+	app.Use(cache.StaticCache(-1))
 
 	app.RegisterView(iris.HTML("./web/views", ".html"))
 
-	app.Get("/", iris.StaticCache(24*time.Hour), repository.HomePage)
+	app.Get("/", repository.HomePage)
 	app.Get("/services-us", repository.ServicesPage)
 	app.Get("/contact-us", repository.ContactPage)
 	app.Get("/about-us", repository.AboutPage)

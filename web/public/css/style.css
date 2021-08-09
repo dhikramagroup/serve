@@ -126,6 +126,7 @@ nav a{
     color: var(--secondary-color);
     font-weight: bolder;
     text-decoration: none;
+    color: black;
 }
 
 
