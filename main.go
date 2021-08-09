@@ -5,13 +5,10 @@ import (
 	"web/dhikrama/src/repository"
 
 	"github.com/kataras/iris/v12"
-	"github.com/kataras/iris/v12/cache"
 )
 
 func main() {
 	app := modules.DhikramaApp()
-
-	app.Use(cache.StaticCache(-1))
 
 	app.RegisterView(iris.HTML("./web/views", ".html"))
 
